@@ -17,7 +17,7 @@ jobs:                             # actual tasks to be executed
     
     strategy:
       matrix:
-        shard: [1/3, 2/3, 3/3]       
+        shardIndex: [1, 2, 3]       
 
     steps:
 
@@ -27,7 +27,7 @@ jobs:                             # actual tasks to be executed
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
-          node-version: 20
+          node-version: 22
 
       - name: Install Dependencies
         run: npm ci
@@ -36,13 +36,13 @@ jobs:                             # actual tasks to be executed
         run: npx playwright install --with-deps
 
       - name: Run Playwright Tests
-        run: npx playwright test --shard=${{ matrix.shard }}
+        run: npx playwright test --shard=${{ matrix.shardIndex }}/3
 
       - name: Upload Test Report
         uses: actions/upload-artifact@v4
         if: always()
         with:
-          name: playwright-report-${{ matrix.shard }}
+          name: playwright-report-${{ matrix.shardIndex }}
           path: playwright-report/
 
   deploy:                          # deploy Job
