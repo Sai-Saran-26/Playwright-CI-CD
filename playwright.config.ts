@@ -7,8 +7,8 @@ dotenv.config({ path: path.resolve(__dirname, '.env') });
 export default defineConfig({
   testDir: './tests',
   fullyParallel: false,
-  retries: 1,
-  workers: 2,
+  retries: 2,
+  workers: 1,
   reporter: [
     ['list'],
     ['html', { outputFolder: 'playwright-report', open: 'never' }],
@@ -16,8 +16,9 @@ export default defineConfig({
   expect: { timeout: 10_000 },
   timeout: 60_000,
   use: {
+    browserName: 'chromium',
     baseURL: process.env.BASE_URL,
-    headless: false,
+    headless: process.env.HEADLESS === 'true',
     viewport: { width: 1280, height: 720 },
     actionTimeout: 10_000,
     navigationTimeout: 30_000,
