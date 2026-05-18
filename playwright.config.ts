@@ -6,9 +6,9 @@ dotenv.config({ path: path.resolve(__dirname, '.env') });
 
 export default defineConfig({
   testDir: './tests',
-  fullyParallel: false,
-  retries: 2,
-  workers: 1,
+  fullyParallel: true,
+  retries: process.env.CI ? 2 : 0,
+  workers: process.env.CI ? 1 : undefined,
   reporter: [
     ['list'],
     ['html', { outputFolder: 'playwright-report', open: 'never' }],
@@ -28,10 +28,9 @@ export default defineConfig({
   },
   projects: [
     {
-      name: 'Google Chrome',
+      name: 'Chromium',
       use: {
         ...devices['Desktop Chrome'],
-        channel: 'chrome',
       },
     },
   ],
