@@ -1,18 +1,18 @@
-name: Playwright CI/CD
+name: Playwright CI/CD            # pipeline name 
 
-on:
+on:                               # when to trigger the pipeline 
   push:
     branches:
-      - main
+      - main                      # on push to main branch 
 
   pull_request:
     branches:
-      - main
+      - main                      # on pull request to main branch        
 
-jobs:
+jobs:                             # actual tasks to be executed
 
-  test:
-    runs-on: ubuntu-latest
+  test:                           # test job
+    runs-on: ubuntu-latest        # Github creates a temporary Ubuntu Linux virtual Machine
 
     steps:
 
@@ -40,10 +40,10 @@ jobs:
           name: playwright-report
           path: playwright-report/
 
-  deploy:
+  deploy:                          # deploy Job
     needs: test
 
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-latest         # Another Fresh Ubuntu Linux virtual Machine
 
     steps:
 

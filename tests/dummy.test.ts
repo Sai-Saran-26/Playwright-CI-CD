@@ -27,7 +27,7 @@ test.describe('Login', () => {
     await dummyPage.top2Expensive(laptopNames);
   })
 
-  test.only('TC - 003 Select the second most expensive laptop', async() => {
+  test('TC - 003 Select the second most expensive laptop', async() => {
     await dummyPage.clickCategory('Laptops');
     const laptopNames = await dummyPage.allLaptopNames();
     const actual =await dummyPage.selectSecondMostExpensive(laptopNames);
