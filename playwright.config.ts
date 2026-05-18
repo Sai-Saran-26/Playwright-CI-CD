@@ -7,8 +7,8 @@ dotenv.config({ path: path.resolve(__dirname, '.env') });
 export default defineConfig({
   testDir: './tests',
   fullyParallel: false,
-  retries: 0,
-  workers: 1,
+  retries: 1,
+  workers: 2,
   reporter: [
     ['list'],
     ['html', { outputFolder: 'playwright-report', open: 'never' }],
